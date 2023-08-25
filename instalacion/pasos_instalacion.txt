@@ -1,0 +1,14 @@
+1º Se debe descargar la última versión de node js desde la página oficial 
+	https://nodejs.org/en/download
+
+2º Instala y reinicia el ordenador
+
+3º Descargar el repo desde git para ello se recomienda la descarga de gitbash
+	https://git-scm.com/downloads
+
+4º Descarga xamp 
+	https://www.apachefriends.org/download.html
+
+5º Instalacion de xamp
+
+6º Crear el usuario yest en nuestra BBDD en localhost y solicitar la contraseña
