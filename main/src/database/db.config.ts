@@ -5,9 +5,9 @@ dotenv.config();
 
 export const databaseConfig: IDatabaseConfig = {
   development  :{
-        username: 'root',
-        password: 'root',
-        database: 'development_database_name',
+        username: 'yest',
+        password: 'i8T=xAx@Qc3Ak]w',
+        database: 'development',
         host: 'localhost',
         port: 3306,
         dialect: 'mysql',
