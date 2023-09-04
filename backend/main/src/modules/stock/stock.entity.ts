@@ -1,13 +1,13 @@
 import { Table, Column, Model, DataType} from 'sequelize-typescript';
 
 @Table
-export class Client extends Model<Client> {
+export class Stock extends Model<Stock> {
 
     /** 
-    * Class used to create the table Client
+    * Class used to create the table Stock
     *
-    * @param name - Name of the user
-    * @param firstname - first name of the user
+    * @param name - Name of the item
+    * @param ref_code - code of the item
     * @param secondname - if have, second name of the user
     * @param address - Place where the user live
     * @param CIF - Identity fiscal code
@@ -25,25 +25,25 @@ export class Client extends Model<Client> {
         type: DataType.STRING,
         allowNull: false,
     })
-    firstname: string;
+    ref_code: string;
 
     
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: true,
     })
-    secondname: string;
+    items_number: number ;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.DOUBLE,
         allowNull: false,
     })
-    CIF: string;
+    TAX: number;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.DOUBLE,
         allowNull: false,
     })
-    address: string;
+    price_without_tax: number;
     
 }

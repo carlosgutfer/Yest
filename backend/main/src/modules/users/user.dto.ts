@@ -25,7 +25,7 @@ export class UserDto {
     * @param permiss - type of user
     * @param email - email of the user
     * @param gender - gender of the user
-    * @param adress - Place where the user live
+    * @param address - Place where the user live
     * @param password - password to login 
     * @param phone1 - number of contact
     * @param phone2 - second number of contact

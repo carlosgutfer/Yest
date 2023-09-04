@@ -13,6 +13,7 @@ import { UsersModule } from './modules/users/users.module';
       DatabaseModule,
       UsersModule,
       AuthModule,
+      
     ],
     controllers: [AppController],
   providers: [AppService],

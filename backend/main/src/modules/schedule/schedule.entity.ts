@@ -11,11 +11,8 @@ export class Schedule extends Model<Schedule> {
     * @param start_time Time when the schedule start
     * @param end_time Time when the schedule end
     * @param type type of the register holidays, normal, permiss...
-    * @param user_id the person who recibe the permiss
-    * @param 
-    * @param 
-    * @param 
-    * @param 
+    * @param userId_payee the person who recibe the permiss
+    * @param userId_admin the person who give the permiss
     */
 
     @Column({
@@ -56,7 +53,7 @@ export class Schedule extends Model<Schedule> {
         type: DataType.INTEGER,
         allowNull: false,
     })
-    userId_payee: number;
+    user_id_payee: number;
 
 
     @ForeignKey(() => User)
@@ -64,7 +61,7 @@ export class Schedule extends Model<Schedule> {
         type: DataType.INTEGER,
         allowNull: false,
     })
-    userId_admin: number;
+    user_id_admin: number;
 
 
     @BelongsTo(() => User)
