@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { databaseConfig } from './db.config';
 import { User } from '../modules/users/user.entity';
+import { Schedule } from 'src/modules/schedule/schedule.entity';
 
 export const databaseProviders = [{
     provide: 'SEQUELIZE',
@@ -8,7 +9,7 @@ export const databaseProviders = [{
         let config;
         config = databaseConfig.development;
         const sequelize = new Sequelize(config);
-        sequelize.addModels([User]);
+        sequelize.addModels([User, Schedule]);
         await sequelize.sync();
         return sequelize;
     },
