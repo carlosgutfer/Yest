@@ -18,7 +18,7 @@ export class Order_stock extends Model<Order_stock> {
 
     @Column({
         type: DataType.INTEGER,
-        allowNull: true,
+        allowNull: false,
     })
     items_number: number ;
 

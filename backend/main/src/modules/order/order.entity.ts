@@ -24,7 +24,7 @@ export class Order extends Model<Order> {
         type: DataType.STRING,
         allowNull: true,
     })
-    time: string | null;
+    time: string;
 
     @ForeignKey(() => Restaurant_Table)
     @Column({

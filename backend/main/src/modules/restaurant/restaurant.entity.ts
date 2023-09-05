@@ -28,7 +28,7 @@ export class Restaurant extends Model<Restaurant> {
     
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     })
     notes: string;
 

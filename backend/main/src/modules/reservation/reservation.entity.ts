@@ -24,7 +24,7 @@ export class Reservation extends Model<Reservation> {
 
     @Column({
         type: DataType.STRING,
-        allowNull: true,
+        allowNull: false,
     })
     time: string | null;
 
@@ -37,7 +37,7 @@ export class Reservation extends Model<Reservation> {
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     })
     note: string;
 
