@@ -25,8 +25,22 @@ export class ScheduleDto {
     readonly end_time: string | null;
 
     @IsNotEmpty()
-    type: string;
+    readonly type: string;
 
-    readonly client_id: number | null;
+    readonly user_id_payee: number;
+
+    client_id: number;
+
+    private user_id_admin: number; 
+
+    public set_user_id_admin(user_id_admin: number)
+    {
+        this.user_id_admin = user_id_admin
+    }
+
+    public set_client_id(client_id: number)
+    {
+        this.client_id = client_id
+    }
 
 }

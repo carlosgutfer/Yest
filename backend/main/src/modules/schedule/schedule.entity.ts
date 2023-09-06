@@ -63,7 +63,7 @@ export class Schedule extends Model<Schedule> {
         type: DataType.INTEGER,
         allowNull: false,
     })
-    user_id_admin: number;
+    private user_id_admin: number;
 
 
     @BelongsTo(() => User)
@@ -79,4 +79,6 @@ export class Schedule extends Model<Schedule> {
 
     @BelongsTo(() => Client)
     client: Client;  
+
+
 }

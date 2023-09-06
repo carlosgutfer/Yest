@@ -25,14 +25,14 @@ export class ClientController {
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get(':CIF')
-  findOne(@Param('CIF') cif: string): Promise<Client> {
-    return this.clientService.findOneByCIF(cif);
+  @Get('findbyCIF')
+  findOne(@Body('CIF') CIF: string): Promise<Client> {
+    return this.clientService.findOneByCIF(CIF);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete(':id')
-  remove(@Param('id') id: number, @Request() req)
+  @Delete('remove_client')
+  remove(@Body('id') id: number, @Request() req)
   {
     if (req.user.permiss == 'admin')
       return this.clientService.delete(id);
