@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from '../users/user.entity'
 import { Restaurant_Table } from '../table/table.entity';
+import { Client } from '../client/client.entity';
 
 @Table
 export class Order extends Model<Order> {
@@ -46,5 +47,16 @@ export class Order extends Model<Order> {
 
 
     @BelongsTo(() => User)
-    user: User;  
+    user: User;
+    
+    
+    @ForeignKey(() => Client)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+    })
+    client_id: number | null;
+
+    @BelongsTo(() => Client)
+    client: Client;  
 }

@@ -27,4 +27,6 @@ export class ScheduleDto {
     @IsNotEmpty()
     type: string;
 
+    readonly client_id: number | null;
+
 }

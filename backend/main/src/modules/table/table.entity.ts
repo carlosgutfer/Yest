@@ -1,5 +1,6 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Restaurant } from '../restaurant/restaurant.entity';
+import { Client } from '../client/client.entity';
 
 
 @Table
@@ -28,4 +29,15 @@ export class Restaurant_Table extends Model<Restaurant_Table> {
 
     @BelongsTo(() => Restaurant)
     restaurant: Restaurant;  
+
+
+    @ForeignKey(() => Client)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+    })
+    client_id: number | null;
+
+    @BelongsTo(() => Client)
+    client: Client;  
 }

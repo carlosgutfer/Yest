@@ -23,4 +23,7 @@ export class Order_stockDto {
     @IsNotEmpty()
     readonly price_with_tax_all_items: number;
 
+    readonly client_id: number | null;
+
+
 }

@@ -1,5 +1,7 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from '../users/user.entity'
+import { Client } from '../client/client.entity';
+
 @Table
 export class Schedule extends Model<Schedule> {
 
@@ -66,4 +68,15 @@ export class Schedule extends Model<Schedule> {
 
     @BelongsTo(() => User)
     user: User;  
+
+
+    @ForeignKey(() => Client)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+    })
+    client_id: number | null;
+
+    @BelongsTo(() => Client)
+    client: Client;  
 }

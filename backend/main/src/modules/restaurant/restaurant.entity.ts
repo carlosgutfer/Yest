@@ -77,6 +77,7 @@ export class Restaurant extends Model<Restaurant> {
 
 
     @BelongsTo(() => User)
-    user: User;  
+    user: User; 
+    
     
 }

@@ -24,5 +24,8 @@ export class ReservationDto {
     readonly number_customer: number;
 
     readonly note: string;
+
+    readonly client_id: number | null;
+
  
 }

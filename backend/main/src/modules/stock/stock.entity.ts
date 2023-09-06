@@ -1,4 +1,5 @@
-import { Table, Column, Model, DataType} from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import { Client } from '../client/client.entity';
 
 @Table
 export class Stock extends Model<Stock> {
@@ -45,5 +46,15 @@ export class Stock extends Model<Stock> {
         allowNull: false,
     })
     price_without_tax: number;
+
+    @ForeignKey(() => Client)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+    })
+    client_id: number | null;
+
+    @BelongsTo(() => Client)
+    client: Client;  
     
 }

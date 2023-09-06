@@ -11,5 +11,6 @@ export class Restaurant_TableDto {
 
     @IsNotEmpty()
     readonly number_table: number;
-
+    
+    readonly client_id: number | null;
 }

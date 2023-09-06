@@ -18,4 +18,6 @@ export class OrderDto {
     @IsNotEmpty()
     readonly time: string;
 
+    readonly client_id: number | null;
+
 }

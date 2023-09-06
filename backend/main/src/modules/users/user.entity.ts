@@ -90,10 +90,9 @@ export class User extends Model<User> {
     @ForeignKey(() => Client)
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        allowNull: true,
     })
-    client_id: number;
-
+    client_id: number | null;
 
     @BelongsTo(() => Client)
     client: Client;  

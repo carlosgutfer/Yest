@@ -67,4 +67,6 @@ export class UserDto {
     readonly phone1: number;
     
     readonly phone2: number;
+
+    readonly client_id: number | null;
 }

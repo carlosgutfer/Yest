@@ -29,4 +29,6 @@ export class StockDto {
     @IsNotEmpty()
     readonly price_without_tax: number;
     
+    readonly client_id: number | null;
+
 }
