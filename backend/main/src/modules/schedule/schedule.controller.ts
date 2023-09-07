@@ -11,19 +11,21 @@ export class ScheduleController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('new')
-  create(@Body() createUserDto: ScheduleDto, @Request() req): Promise<Schedule> 
+  create(@Body() ScheduleDto: ScheduleDto, @Request() req): Promise<Schedule> 
   {
-    if (req.user.permiss in  ['admin', 'owner', 'user_plus'])
-      createUserDto.set_client_id(req.user.client_id);
-      createUserDto.set_user_id_admin(req.user.id);
-      return this.ScheduleService.create(createUserDto);
+    
+    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss)){
+      ScheduleDto.client_id = req.user.client_id;
+      ScheduleDto.user_id_admin = req.user.id;
+      return this.ScheduleService.create(ScheduleDto);
+    }
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete('remove')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (req.user.permiss in  ['admin', 'owner', 'user_plus'])
+    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
       return this.ScheduleService.delete(id);
   }
 
@@ -31,7 +33,7 @@ export class ScheduleController {
   @Put('update')
   update(@Param('id') id: number, @Body() schedule: ScheduleDto, @Request() req)
   {
-    if (req.user.permiss in  ['admin', 'owner', 'user_plus'])
+    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
       return this.ScheduleService.update(id, schedule);
   }
 
@@ -42,22 +44,24 @@ export class ScheduleController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByClient')
   findAllByClient(@Request() req): Promise<Schedule[]> {
-    if (req.user.permiss in  ['admin', 'owner', 'user_plus'])
-      return this.ScheduleService.findAllByClient(req.user);
+    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+      return this.ScheduleService.findAllByClient(req.user.client_id);
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByTypeAndClient')
   findAllbyTypeAndClient(@Body() type: string, @Request() req): Promise<Schedule[]> {
-    if (req.user.permiss in  ['admin', 'owner', 'user_plus'])
-      return this.ScheduleService.findAllByTypeAndClient(type, req.user);
+    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+      return this.ScheduleService.findAllByTypeAndClient(type, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByClient')
   findAllByIdClient(@Body() id: number, @Request() req): Promise<Schedule[]> {
-    if (req.user.permiss in  ['admin', 'owner', 'user_plus'])
-      return this.ScheduleService.findAllByIdAndClient(id, req.user);
+    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+      return this.ScheduleService.findAllByIdAndClient(id, req.user.client_id);
+    else if (req.user.permiss == 'user')
+      return this.ScheduleService.findAllByIdAndClient(req.user.id, req.user.client_id);
   }
 
 

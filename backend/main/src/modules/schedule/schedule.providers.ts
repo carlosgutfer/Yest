@@ -2,6 +2,6 @@ import { Schedule } from './schedule.entity';
 
 
 export const scheduleProviders = [{
-    provide: 'Schedule_REPOSITORY',
+    provide: 'SCHEDULE_REPOSITORY',
     useValue: Schedule,
 }];

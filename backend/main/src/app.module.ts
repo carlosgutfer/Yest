@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { ClientModule } from './modules/client/client.module';
+import { SheduleModule } from './modules/schedule/schedule.module';
 
 @Module({
     imports: [
@@ -14,7 +15,8 @@ import { ClientModule } from './modules/client/client.module';
       DatabaseModule,
       UsersModule,
       AuthModule,
-      ClientModule
+      ClientModule,
+      SheduleModule,
       
     ],
     controllers: [AppController],
