@@ -30,5 +30,11 @@ export class RestaurantDto {
     readonly phone1: number;
   
     readonly phone2: number;
+
+    @IsNotEmpty()
+    readonly user_id: number;
+
+    @IsNotEmpty()
+    readonly client_id: number;
      
 }
