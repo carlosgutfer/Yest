@@ -56,8 +56,8 @@ export class ScheduleController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByClient')
-  findAllByIdClient(@Body() id: number, @Request() req): Promise<Schedule[]> {
+  @Get('findAllByIdAndClient')
+  findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Schedule[]> {
     if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
       return this.ScheduleService.findAllByIdAndClient(id, req.user.client_id);
     else if (req.user.permiss == 'user')

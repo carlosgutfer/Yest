@@ -47,8 +47,8 @@ export class StockController {
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByClient')
-  findAllByIdClient(@Body() id: number, @Request() req): Promise<Stock[]> {
+  @Get('findAllByIdAndClient')
+  findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Stock[]> {
     if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
       return this.StockService.findAllByIdAndClient(id, req.user.client_id);
     else if (req.user.permiss == 'user')
@@ -89,7 +89,7 @@ export class StockController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
-  findAllbyId(@Body('id') id: number, @Request() req): Promise<Stock> {
+  findbyId(@Body('id') id: number, @Request() req): Promise<Stock> {
     if (req.user.permiss == 'admin')
         return this.StockService.findById(id);
   }

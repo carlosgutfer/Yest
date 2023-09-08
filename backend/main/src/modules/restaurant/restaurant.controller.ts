@@ -54,8 +54,8 @@ export class RestaurantController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByClient')
-  findAllByIdClient(@Body() id: number, @Request() req): Promise<Restaurant[]> {
+  @Get('findAllByIdandClient')
+  findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Restaurant[]> {
     if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
       return this.Restaurantervice.findAllByIdAndClient(id, req.user.client_id);
   }
