@@ -1,5 +1,11 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsEnum } from "class-validator";
 
+
+enum State {
+    OPEN = 'open',
+    CLOSE = 'close',
+    INCIDENT = 'incident',
+}
 
 export class OrderDto {
 
@@ -17,6 +23,12 @@ export class OrderDto {
 
     @IsNotEmpty()
     readonly time: string;
+
+    @IsNotEmpty()
+    @IsEnum(State, {
+        message: 'Permiss value must be valid',
+    })
+    readonly state: string;
 
     readonly client_id: number | null;
 

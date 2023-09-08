@@ -27,6 +27,13 @@ export class Order extends Model<Order> {
     })
     time: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        values: ['open', 'close', 'incident'],
+    })
+    state: string;
+
     @ForeignKey(() => Restaurant_Table)
     @Column({
         type: DataType.INTEGER,
