@@ -14,6 +14,9 @@ export class Order_stockDto {
     */
 
     @IsNotEmpty()
+    readonly order_id: number ;
+
+    @IsNotEmpty()
     readonly items_number: number ;
 
     @IsNotEmpty()
