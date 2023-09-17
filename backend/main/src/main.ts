@@ -14,6 +14,8 @@ async function bootstrap()
 
   // parse requests of content-type - application/x-www-form-urlencoded
   app.use(express.urlencoded({ extended: true }));
+  
+  app.enableCors ();
 
   app.setGlobalPrefix('api/v1');
   // para validar los inputs que llegan a nuestros endpoints
