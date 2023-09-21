@@ -26,10 +26,13 @@ export class OrderDto {
 
     @IsNotEmpty()
     @IsEnum(State, {
-        message: 'Permiss value must be valid',
+        message: 'State value must be valid',
     })
     readonly state: string;
 
-    readonly client_id: number | null;
+    readonly user_id: number;
 
+    readonly client_id: number;
+    
+    readonly table_id: number;
 }
