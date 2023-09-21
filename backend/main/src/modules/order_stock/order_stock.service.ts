@@ -7,7 +7,7 @@ import { Stock } from '../stock/stock.entity';
 export class OrderStockService {
 
 
-        constructor(@Inject('Order_REPOSITORY') private readonly Order_stockRepository: typeof Order_stock) { }
+        constructor(@Inject('ORDER_STOCK_REPOSITORY') private readonly Order_stockRepository: typeof Order_stock) { }
     
         async create(Order_stock: Order_stockDto): Promise<Order_stock> {
             return await this.Order_stockRepository.create<Order_stock>(Order_stock);

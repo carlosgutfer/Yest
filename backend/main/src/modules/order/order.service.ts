@@ -6,7 +6,7 @@ import { User } from '../users/user.entity';
 @Injectable()
 export class OrderService {
 
-    constructor(@Inject('Order_REPOSITORY') private readonly OrderRepository: typeof Order) { }
+    constructor(@Inject('ORDER_REPOSITORY') private readonly OrderRepository: typeof Order) { }
 
     async create(Order: OrderDto): Promise<Order> {
         return await this.OrderRepository.create<Order>(Order);

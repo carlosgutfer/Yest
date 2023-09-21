@@ -1,6 +1,6 @@
 import { Order } from './order.entity';
 
 export const orderProviders = [{
-    provide: 'order_REPOSITORY',
+    provide: 'ORDER_REPOSITORY',
     useValue: Order,
 }];
