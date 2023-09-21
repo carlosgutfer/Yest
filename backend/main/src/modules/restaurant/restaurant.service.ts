@@ -3,7 +3,7 @@ import { RestaurantDto } from './restaurant.dto';
 import { Restaurant } from './restaurant.entity';
 @Injectable()
 export class RestaurantService {
-    constructor(@Inject('RESTAURAN_REPOSITORY') private readonly RestaurantRepository: typeof Restaurant) { }
+    constructor(@Inject('RESTAURANT_REPOSITORY') private readonly RestaurantRepository: typeof Restaurant) { }
 
     async create(Restaurant: RestaurantDto): Promise<Restaurant> {
         return await this.RestaurantRepository.create<Restaurant>(Restaurant);

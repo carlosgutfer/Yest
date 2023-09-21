@@ -1,6 +1,6 @@
 import { Reservation } from './reservation.entity';
 
 export const reservationProviders = [{
-    provide: 'Reservation_REPOSITORY',
+    provide: 'RESERVATION_REPOSITORY',
     useValue: Reservation,
 }];

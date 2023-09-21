@@ -29,6 +29,7 @@ export class UserDto {
     * @param password - password to login 
     * @param phone1 - number of contact
     * @param phone2 - second number of contact
+    * @param client_id - id of the table client
     */
 
 
