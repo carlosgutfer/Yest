@@ -23,12 +23,13 @@ import { RestaurantModule } from './modules/restaurant/restaurant.module';
       AuthModule,
       ClientModule,
       SheduleModule,
-      OrderModule,
       OrderStockModule,
       ReservationModule,
       StockModule,
+      OrderModule,
       TableModule,
-      RestaurantModule
+      RestaurantModule,
+      
     ],
     controllers: [AppController],
   providers: [AppService],

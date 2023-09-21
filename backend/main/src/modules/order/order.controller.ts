@@ -1,19 +1,19 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards, Request, Put } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { OrderDto } from './Order.dto';
-import { Order } from './Order.entity';
-import { OrderService } from './Order.service';
+import { OrderDto } from './order.dto';
+import { Order } from './order.entity';
+import { OrderService } from './order.service';
 
 @Controller('Orders')
 export class OrderController {
   
-  constructor(private readonly OrderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Post('new')
   create(@Body() OrderDto: OrderDto, @Request() req): Promise<Order> 
   {   
-    return this.OrderService.create(OrderDto); 
+    return this.orderService.create(OrderDto); 
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -21,7 +21,7 @@ export class OrderController {
   remove(@Body('id') id: number, @Request() req)
   {
     if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.OrderService.delete(id);
+      return this.orderService.delete(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -29,7 +29,7 @@ export class OrderController {
   update(@Param('id') id: number, @Body() Order: OrderDto, @Request() req)
   {
     if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.OrderService.update(id, Order);
+      return this.orderService.update(id, Order);
   }
 
   /*
@@ -40,28 +40,28 @@ export class OrderController {
   @Get('findAllByClient')
   findAllByClient(@Request() req): Promise<Order[]> {
     if (['admin', 'owner', 'user_plus', 'user'].includes(req.user.permiss))
-      return this.OrderService.findAllByClient(req.user.client_id);
+      return this.orderService.findAllByClient(req.user.client_id);
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByTableAndClient')
   findOneByIdClient(@Body() id: number, @Request() req): Promise<Order> {
     if (['admin', 'owner', 'user_plus', 'user'].includes(req.user.permiss))
-      return this.OrderService.findOneByTableAndClient(id, req.user.client_id);
+      return this.orderService.findOneByTableAndClient(id, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByTableAndClient')
   findAllByUserAndClient(@Body() user_id: number, @Request() req): Promise<Order[]> {
     if (['admin', 'owner', 'user_plus', 'user'].includes(req.user.permiss))
-      return this.OrderService.findAllByUserAndClient(user_id, req.user.client_id);
+      return this.orderService.findAllByUserAndClient(user_id, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByDateAndClient')
   findOneByDateAndTable(@Body() date : Date, table_id : number , @Request() req): Promise<Order> {
     if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.OrderService.findOneByDateAndTable(date, table_id , req.user.client_id);
+      return this.orderService.findOneByDateAndTable(date, table_id , req.user.client_id);
   }
 
 
@@ -73,21 +73,21 @@ export class OrderController {
   @Get('findAll')
   findAll(@Request() req): Promise<Order[]> {
     if (req.user.permiss == 'admin')
-      return this.OrderService.findAll();
+      return this.orderService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllbyName')
   findAllbyDate(@Body('date') date: Date, @Request() req): Promise<Order[]> {
     if (req.user.permiss == 'admin')
-        return this.OrderService.findAllByDate(date);
+        return this.orderService.findAllByDate(date);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
   findAllbyId(@Body('id') id: number, @Request() req): Promise<Order> {
     if (req.user.permiss == 'admin')
-        return this.OrderService.findOneById(id);
+        return this.orderService.findOneById(id);
   }
 
 }

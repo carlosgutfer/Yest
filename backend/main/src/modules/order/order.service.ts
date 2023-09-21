@@ -6,24 +6,24 @@ import { User } from '../users/user.entity';
 @Injectable()
 export class OrderService {
 
-    constructor(@Inject('ORDER_REPOSITORY') private readonly OrderRepository: typeof Order) { }
+    constructor(@Inject('ORDER_REPOSITORY') private readonly orderRepository: typeof Order) { }
 
     async create(Order: OrderDto): Promise<Order> {
-        return await this.OrderRepository.create<Order>(Order);
+        return await this.orderRepository.create<Order>(Order);
     }
     
     async delete(id) {
-      return await this.OrderRepository.destroy({ where: { id }});
+      return await this.orderRepository.destroy({ where: { id }});
     }
 
     async update(id, data) {
-      const [numberOfAffectedRows, [updatedOrder]] = await this.OrderRepository.update({ ...data }, { where: { id }, returning: true });
+      const [numberOfAffectedRows, [updatedOrder]] = await this.orderRepository.update({ ...data }, { where: { id }, returning: true });
       return { numberOfAffectedRows, updatedOrder };
     }
 
     async findAllByDate(date: Date): Promise<Order[]> {
         try {
-            return await this.OrderRepository.findAll<Order>({where: { date },
+            return await this.orderRepository.findAll<Order>({where: { date },
               include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
           } catch (error) {
             throw error;
@@ -32,7 +32,7 @@ export class OrderService {
 
     async findAll(): Promise<Order[]> {
       try {
-          return await this.OrderRepository.findAll<Order>({include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
+          return await this.orderRepository.findAll<Order>({include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
         } catch (error) {
           throw error;
         }
@@ -40,7 +40,7 @@ export class OrderService {
 
     async findOneById(id: number): Promise<Order> {
         try {
-            return await this.OrderRepository.findOne<Order>({where: { id },
+            return await this.orderRepository.findOne<Order>({where: { id },
               include: [{ model: User, attributes: { include: ['name', 'firstname'] } }]});
           } catch (error) {
             throw error;
@@ -51,7 +51,7 @@ export class OrderService {
     /* Methods for owner and user_plus */
     async findOneByDateAndTable(date: Date, table_id:number ,client_id: number): Promise<Order> {
       try {
-          return await this.OrderRepository.findOne<Order>({where: { date, client_id },
+          return await this.orderRepository.findOne<Order>({where: { date, client_id },
             include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
         } catch (error) {
           throw error;
@@ -60,7 +60,7 @@ export class OrderService {
 
   async findOneByTableAndClient(table_id: number, client_id: number): Promise<Order> {
     try {
-        return await this.OrderRepository.findOne<Order>({where: { table_id, client_id },
+        return await this.orderRepository.findOne<Order>({where: { table_id, client_id },
           include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
       } catch (error) {
         throw error;
@@ -69,7 +69,7 @@ export class OrderService {
 
   async findAllByClient(client_id: number): Promise<Order[]> {
         try {
-            return await this.OrderRepository.findAll<Order>({where: {client_id },
+            return await this.orderRepository.findAll<Order>({where: {client_id },
               include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
           } catch (error) {
             throw error;
@@ -78,7 +78,7 @@ export class OrderService {
   
   async findAllByUserAndClient(user_id: number, client_id: number): Promise<Order[]> {
       try {
-          return await this.OrderRepository.findAll<Order>({where: { user_id, client_id },
+          return await this.orderRepository.findAll<Order>({where: { user_id, client_id },
             include: [{ model: User, attributes: { include: ['name', 'firstname'] } }],});
         } catch (error) {
           throw error;
