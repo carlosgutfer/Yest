@@ -1,0 +1,60 @@
+<h1>CREAR USUARIO </h1>
+
+<form (ngSubmit)="createUser()">
+   
+  <div class="form-group">
+    <label for="name">Id CLIENTE:</label>
+    <input type="text" id="id" [(ngModel)]="user.client_id" name="id" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="name">Nombre:</label>
+    <input type="text" id="firstName" [(ngModel)]="user.name" name="name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="firstName">Apellido 1 :</label>
+    <input type="text" id="lastName" [(ngModel)]="user.firstname" name="firstName" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="secondName">Apellido 2 :</label>
+    <input type="text" id="lastName" [(ngModel)]="user.secondname" name="secondName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="permiss">permisos :</label>
+    <input type="text" id="permiss" [(ngModel)]="user.permiss" name="permiss" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password">password :</label>
+    <input type="text" id="password" [(ngModel)]="user.password" name="password" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="gender">genero :</label>
+    <input type="text" id="gender" [(ngModel)]="user.gender" name="gender" required>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Dirección :</label>
+    <input type="text" id="address" [(ngModel)]="user.address" name="address" required>
+  </div>
+
+  
+  <div class="form-group">
+    <label for="tlf1">TLF_1 :</label>
+    <input type="text" id="tlf1" [(ngModel)]="user.phone1" name="tlf1" required>
+  </div>
+
+  <button type="submit">Crear Usuario</button>
+</form>
+
+
+

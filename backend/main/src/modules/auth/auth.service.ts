@@ -64,6 +64,4 @@ export class AuthService {
         const match = await bcrypt.compare(enteredPassword, dbPassword);
         return match;
     }
-
-
 }

@@ -5,8 +5,10 @@ dotenv.config();
 
 export const databaseConfig: IDatabaseConfig = {
   development  :{
-        username: 'yest',
-        password: 'i8T=xAx@Qc3Ak]w',
+        //username: 'yest',
+        //password: 'i8T=xAx@Qc3Ak]w',
+        username: "root",
+        password: "",
         database: 'development',
         host: 'localhost',
         port: 3306,
