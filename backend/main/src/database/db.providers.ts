@@ -9,6 +9,8 @@ import { Reservation } from 'src/modules/reservation/reservation.entity';
 import { Restaurant } from 'src/modules/restaurant/restaurant.entity';
 import { Stock } from 'src/modules/stock/stock.entity';
 import { Restaurant_Table } from 'src/modules/table/table.entity';
+import { Menu } from 'src/modules/menu/menu.entity';
+import { MenuStock } from 'src/modules/menuStock/menuStock.entity';
 
 
 export const databaseProviders = [{
@@ -17,7 +19,7 @@ export const databaseProviders = [{
         let config;
         config = databaseConfig.development;
         const sequelize = new Sequelize(config);
-        sequelize.addModels([User, Schedule, Client, Order, Order_stock, Reservation, Restaurant, Stock, Restaurant_Table]);
+        sequelize.addModels([User, Schedule, Client, Order, Order_stock, Reservation, Restaurant, Stock, Restaurant_Table, Menu, MenuStock]);
         await sequelize.sync();
         return sequelize;
     },

@@ -39,6 +39,10 @@ export class StockService {
         return await this.StockRepository.findOne<Stock>({ where: { ref_code, client_id}});
     }
 
+    async findAllByRefAndClient(ref_code: string, client_id:number): Promise<Stock[]> {
+        return await this.StockRepository.findAll<Stock>({ where: { ref_code, client_id}});
+    }
+
     /*
         Methods for admin
     */
@@ -53,6 +57,7 @@ export class StockService {
     async findAll(): Promise<Stock[]> {
         return await this.StockRepository.findAll<Stock>();
     }
+
 
 
 }
