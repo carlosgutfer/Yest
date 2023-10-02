@@ -21,6 +21,12 @@ export class StockDto {
     readonly ref_code: string;
 
     @IsNotEmpty()
+    readonly date_entry: string;
+
+    @IsNotEmpty()
+    readonly expiration_date: string;
+
+    @IsNotEmpty()
     readonly items_number: number ;
 
     @IsNotEmpty()
@@ -28,6 +34,11 @@ export class StockDto {
 
     @IsNotEmpty()
     readonly price_without_tax: number;
+
+    @IsNotEmpty()
+    readonly seller_price: number;
+
+    readonly notes: string;
     
     readonly client_id: number | null;
 

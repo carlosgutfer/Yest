@@ -10,7 +10,7 @@ export class RestaurantService {
     }
 
     async update(id, data) {
-        const [numberOfAffectedRows, [updatedRestaurant]] = await this.RestaurantRepository.update({ ...data }, { where: { id }, returning: true });
+        const [numberOfAffectedRows, [updatedRestaurant]] = await this.RestaurantRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
         return { numberOfAffectedRows, updatedRestaurant };
     }
     

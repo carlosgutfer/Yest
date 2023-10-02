@@ -18,7 +18,7 @@ export class Stock extends Model<Stock> {
 
     */
 
-     @Column({
+    @Column({
         type: DataType.STRING,
         allowNull: false,
     })

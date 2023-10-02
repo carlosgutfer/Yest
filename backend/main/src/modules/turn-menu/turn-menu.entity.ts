@@ -72,8 +72,10 @@ export class TurnMenu extends Model<TurnMenu> {
         type: DataType.INTEGER,
         allowNull: false,
     })
-    @BelongsTo(() => Menu)
     menu_id: number;
+
+    @BelongsTo(() => Menu)
+    menu: number;
     
     @ForeignKey(() => Restaurant)
     @Column({

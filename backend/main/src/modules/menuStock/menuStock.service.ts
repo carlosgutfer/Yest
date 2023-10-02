@@ -18,7 +18,7 @@ export class MenuStockService {
     }
 
     async update(id: number, data: MenuStock): Promise<[number, MenuStock[]]> {
-        return await this.menuStockRepository.update({ ...data }, { where: { id }, returning: true });
+        return await this.menuStockRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
     }
 
     async findAll(): Promise<MenuStock[]> {

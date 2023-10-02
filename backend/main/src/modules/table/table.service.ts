@@ -16,7 +16,7 @@ export class TableService {
     }
 
     async update(id, data) {
-      const [numberOfAffectedRows, [updatedOrder]] = await this.RestaurantTableRepository.update({ ...data }, { where: { id }, returning: true });
+      const [numberOfAffectedRows, [updatedOrder]] = await this.RestaurantTableRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
       return { numberOfAffectedRows, updatedOrder };
     }
 

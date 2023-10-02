@@ -17,7 +17,7 @@ export class OrderService {
     }
 
     async update(id, data) {
-      const [numberOfAffectedRows, [updatedOrder]] = await this.orderRepository.update({ ...data }, { where: { id }, returning: true });
+      const [numberOfAffectedRows, [updatedOrder]] = await this.orderRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
       return { numberOfAffectedRows, updatedOrder };
     }
 

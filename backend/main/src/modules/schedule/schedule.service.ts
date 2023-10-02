@@ -12,7 +12,7 @@ export class ScheduleServices {
     }
 
     async update(id, data) {
-        const [numberOfAffectedRows, [updatedSchedule]] = await this.scheduleRepository.update({ ...data }, { where: { id }, returning: true });
+        const [numberOfAffectedRows, [updatedSchedule]] = await this.scheduleRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
         return { numberOfAffectedRows, updatedSchedule };
     }
     
