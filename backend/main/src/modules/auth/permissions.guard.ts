@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { CaslAbilityFactory, AppAbility } from "./casl-ability.factory";
 import { RequiredPermission, PERMISSION_CHECKER_KEY } from "./permissions.decorator";
@@ -15,6 +15,11 @@ export class PermissionsGuard implements CanActivate {
     return requiredPermissions.every(permission => this.isAllowed(ability, permission));
   }
   private isAllowed(ability: AppAbility, permission: RequiredPermission): boolean {
-    return ability.can(...permission);
+    const respone = ability.can(...permission);
+    if (!respone) 
+        throw new UnauthorizedException('You are not authorized to perform this action. Please contact your administrator if you believe this is an error. Thank you.');
+    else
+        return respone
+    
   }
 }
