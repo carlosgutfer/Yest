@@ -13,14 +13,13 @@ export class ClientController {
   @Post('new_client')
   create(@Body() createUserDto: ClientDto, @Request() req): Promise<Client> 
   {
-    if (req.user.permiss == 'admin')
+  
       return this.clientService.create(createUserDto);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('all_clients')
   findAll(@Request() req): Promise<Client[]> {
-    if (req.user.permiss == 'admin')
       return this.clientService.findAll();
   }
   
@@ -34,7 +33,7 @@ export class ClientController {
   @Delete('remove_client')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (req.user.permiss == 'admin')
+  
       return this.clientService.delete(id);
   }
 }

@@ -1,4 +1,5 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo,BelongsToMany} from 'sequelize-typescript';
+import { Roles } from '../auth/RBAC/roles.entity';
 import { Client } from '../client/client.entity';
 
 @Table
@@ -17,7 +18,9 @@ export class User extends Model<User> {
     * @param password - password to login 
     * @param phone1 - number of contact
     * @param phone2 - second number of contact
-    */
+    * @param client_id - id of the table client
+*/
+
 
     @Column({
         type: DataType.STRING,
@@ -39,13 +42,16 @@ export class User extends Model<User> {
     })
     secondname: string;
 
-    
+    @ForeignKey(() => Roles)
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: false,
-        values: ['admin', 'owner', 'user_plus', 'user', 'non_user'],
     })
-    permiss: string;
+    role_id: number;
+
+    @BelongsTo(() => Roles)
+    role: Roles;
+    
 
     @Column({
         type: DataType.STRING,

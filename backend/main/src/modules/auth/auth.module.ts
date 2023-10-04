@@ -7,6 +7,8 @@ import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
+import { CaslAbilityFactory } from './casl-ability.factory';
+import { PermissionsGuard } from './permissions.guard';
 
 @Module({
   imports: [
@@ -20,8 +22,12 @@ import { JwtStrategy } from './jwt.strategy';
   providers: [
       AuthService,
       LocalStrategy,
-      JwtStrategy
+      JwtStrategy,
+      CaslAbilityFactory,
+      PermissionsGuard,
   ],
   controllers: [AuthController],
+  exports: [CaslAbilityFactory, PermissionsGuard],
+
 })
 export class AuthModule { }

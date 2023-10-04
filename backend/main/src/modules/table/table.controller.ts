@@ -20,7 +20,7 @@ export class Restaurant_TableController {
   @Delete('remove')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.TableService.delete(id);
   }
 
@@ -28,7 +28,7 @@ export class Restaurant_TableController {
   @Put('update')
   update(@Param('id') id: number, @Body() Restaurant_Table: Restaurant_TableDto, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.TableService.update(id, Restaurant_Table);
   }
 
@@ -53,7 +53,7 @@ export class Restaurant_TableController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByRestaurantAndClient')
   findOneByRestaurantAndClient(@Body() number_table : number, restaurant_id : number , @Request() req): Promise<Restaurant_Table> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.TableService.findOneByRestaurantAndClient(number_table, restaurant_id , req.user.client_id);
   }
 
@@ -65,14 +65,14 @@ export class Restaurant_TableController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
   findAll(@Request() req): Promise<Restaurant_Table[]> {
-    if (req.user.permiss == 'admin')
+  
       return this.TableService.findAll();
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
   findAllbyId(@Body('id') id: number, @Request() req): Promise<Restaurant_Table> {
-    if (req.user.permiss == 'admin')
+  
         return this.TableService.findOneById(id);
   }
 

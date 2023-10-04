@@ -12,6 +12,12 @@ import { Restaurant_Table } from 'src/modules/table/table.entity';
 import { Menu } from 'src/modules/menu/menu.entity';
 import { MenuStock } from 'src/modules/menuStock/menuStock.entity';
 import { TurnMenu } from 'src/modules/turn-menu/turn-menu.entity';
+import { CustomMenu } from 'src/modules/customMenu/CustomMenu.entity';
+import { CustomMenuMenu } from 'src/modules/customMenu_menu/customMenu_menu.entity';
+import { Roles } from 'src/modules/auth/RBAC/roles.entity';
+import { Objects } from 'src/modules/auth/RBAC/objects.entity';
+import { Permissions } from 'src/modules/auth/RBAC/permissions.entity';
+import { RolePermissions } from 'src/modules/auth/RBAC/rolePermissions.entity';
 
 export const databaseProviders = [{
     provide: 'SEQUELIZE',
@@ -30,7 +36,13 @@ export const databaseProviders = [{
                             Restaurant_Table, 
                             Menu, 
                             MenuStock,
-                            TurnMenu]);
+                            TurnMenu,
+                            CustomMenu,
+                            CustomMenuMenu,
+                            Roles,
+                            Objects,
+                            Permissions,
+                            RolePermissions]);
         await sequelize.sync();
         return sequelize;
     },
