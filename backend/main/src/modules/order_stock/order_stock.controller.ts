@@ -20,7 +20,7 @@ export class Order_stockController {
   @Delete('remove')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.OrderStockService.delete(id);
   }
 
@@ -28,7 +28,7 @@ export class Order_stockController {
   @Put('update')
   update(@Param('id') id: number, @Body() Order: Order_stockDto, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.OrderStockService.update(id, Order);
   }
 
@@ -47,7 +47,7 @@ export class Order_stockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllbyOrderAndClient')
   findAllByOrderAndClient(@Body() order_id: number, @Request() req): Promise<Order_stock[]> {
-    if (req.user.permiss == 'admin')
+  
         return this.OrderStockService.findAllByOrderAndClient(order_id, req.user.client_id);
   }
 
@@ -59,7 +59,7 @@ export class Order_stockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
   findAll(@Request() req): Promise<Order_stock[]> {
-    if (req.user.permiss == 'admin')
+  
       return this.OrderStockService.findAll();
   }
   
@@ -68,7 +68,7 @@ export class Order_stockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
   findAllbyId(@Body('id') id: number, @Request() req): Promise<Order_stock> {
-    if (req.user.permiss == 'admin')
+  
         return this.OrderStockService.findOneById(id);
   }
 
@@ -76,7 +76,7 @@ export class Order_stockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByOrder')
   findAllByOrder(@Body() order_id: number, @Request() req): Promise<Order_stock[]> {
-    if (req.user.permiss == 'admin')
+  
         return this.OrderStockService.findAllByOrder(order_id);
   }
 

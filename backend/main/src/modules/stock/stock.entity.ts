@@ -9,13 +9,16 @@ export class Stock extends Model<Stock> {
     *
     * @param name - Name of the item
     * @param ref_code - code of the item
-    * @param secondname - if have, second name of the user
-    * @param address - Place where the user live
-    * @param CIF - Identity fiscal code
+    * @param amounts - Number of items avaible, could be number of items or weigth (kg)
+    * @param TAX - IVA value
+    * @param price_without_tax - Cost price
+    * @param date_entry - Day when the product is saved
+    * @param expiration_date - Max day to consume
+    * @param notes - Any important think about the product
 
     */
 
-     @Column({
+    @Column({
         type: DataType.STRING,
         allowNull: false,
     })
@@ -28,12 +31,24 @@ export class Stock extends Model<Stock> {
     })
     ref_code: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    date_entry: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    expiration_date: string;
     
     @Column({
         type: DataType.INTEGER,
         allowNull: true,
     })
-    items_number: number ;
+    items_number: number;
+
 
     @Column({
         type: DataType.DOUBLE,
@@ -46,6 +61,20 @@ export class Stock extends Model<Stock> {
         allowNull: false,
     })
     price_without_tax: number;
+
+    @Column({
+        type: DataType.DOUBLE,
+        allowNull: false,
+    })
+    seller_price: number;
+
+
+    
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    notes: string;
 
     @ForeignKey(() => Client)
     @Column({

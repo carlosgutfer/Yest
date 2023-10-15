@@ -20,7 +20,7 @@ export class OrderController {
   @Delete('remove')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.orderService.delete(id);
   }
 
@@ -28,7 +28,7 @@ export class OrderController {
   @Put('update')
   update(@Param('id') id: number, @Body() Order: OrderDto, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.orderService.update(id, Order);
   }
 
@@ -60,7 +60,7 @@ export class OrderController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByDateAndClient')
   findOneByDateAndTable(@Body() date : Date, table_id : number , @Request() req): Promise<Order> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.orderService.findOneByDateAndTable(date, table_id , req.user.client_id);
   }
 
@@ -72,21 +72,21 @@ export class OrderController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
   findAll(@Request() req): Promise<Order[]> {
-    if (req.user.permiss == 'admin')
+  
       return this.orderService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllbyName')
   findAllbyDate(@Body('date') date: Date, @Request() req): Promise<Order[]> {
-    if (req.user.permiss == 'admin')
+  
         return this.orderService.findAllByDate(date);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
   findAllbyId(@Body('id') id: number, @Request() req): Promise<Order> {
-    if (req.user.permiss == 'admin')
+  
         return this.orderService.findOneById(id);
   }
 

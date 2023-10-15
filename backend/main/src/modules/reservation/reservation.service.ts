@@ -17,7 +17,7 @@ export class ReservationService {
     }
 
     async update(id, data) {
-      const [numberOfAffectedRows, [updatedReservation]] = await this.ReservationRepository.update({ ...data }, { where: { id }, returning: true });
+      const [numberOfAffectedRows, [updatedReservation]] = await this.ReservationRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
       return { numberOfAffectedRows, updatedReservation };
     }
 

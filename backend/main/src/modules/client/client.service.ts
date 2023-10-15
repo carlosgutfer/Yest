@@ -20,7 +20,7 @@ export class ClientService {
     }
 
     async update(id, data) {
-        const [numberOfAffectedRows, [updatedClient]] = await this.clientRepository.update({ ...data }, { where: { id }, returning: true });
+        const [numberOfAffectedRows, [updatedClient]] = await this.clientRepository.update({ ...data.dataValues }, { where: { id }, returning: true });
 
         return { numberOfAffectedRows, updatedClient };
     }

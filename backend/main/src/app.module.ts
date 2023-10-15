@@ -14,6 +14,8 @@ import { ReservationModule } from './modules/reservation/reservation.module';
 import { StockModule } from './modules/stock/stock.module';
 import { TableModule } from './modules/table/table.module';
 import { RestaurantModule } from './modules/restaurant/restaurant.module';
+import { TurnMenuModule } from './modules/turn-menu/turn-menu.module';
+import { MenuStockModule } from './modules/menuStock/menuStock.module';
 
 @Module({
     imports: [
@@ -29,6 +31,8 @@ import { RestaurantModule } from './modules/restaurant/restaurant.module';
       OrderModule,
       TableModule,
       RestaurantModule,
+      MenuStockModule,
+      TurnMenuModule
       
     ],
     controllers: [AppController],

@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards, Request } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserDto } from './user.dto';
+import { CheckPermissions } from '../auth/permissions.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
+import { PermissionsGuard } from '../auth/permissions.guard';
+import { PermissionAction } from '../auth/casl-ability.factory';
 
 @Controller('users')
 export class UsersController {
@@ -23,14 +25,16 @@ export class UsersController {
   */
 
   @UseGuards(AuthGuard('jwt'))
-  @Get(':id')
-  findOne(@Param('id') id: number): Promise<User> {
+  @Get('new')
+  findOne(@Body('id') id: number): Promise<User> {
     return this.usersService.findOneById(id);
   }
 
-  @UseGuards(AuthGuard('jwt'))
-  @Delete(':id')
-  remove(@Param('id') id: number){
+  @UseGuards(AuthGuard('jwt'), PermissionsGuard)
+  @CheckPermissions([PermissionAction.DELETE, "users"])
+  @Delete('delete')
+  remove(@Body('id') id: number){
     return this.usersService.delete(id);
   }
+
 }

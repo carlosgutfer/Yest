@@ -7,15 +7,15 @@ import { StockService } from './stock.service';
 @Controller('Stocks')
 export class StockController {
   
-  constructor(private readonly StockService: StockService) {}
+  constructor(private readonly stockService: StockService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Post('new')
   create(@Body() StockDto: StockDto, @Request() req): Promise<Stock> 
   {
     
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss)){
-      return this.StockService.create(StockDto);
+    {
+      return this.stockService.create(StockDto);
     }
   }
 
@@ -23,16 +23,16 @@ export class StockController {
   @Delete('remove')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.StockService.delete(id);
+    
+      return this.stockService.delete(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Put('update')
   update(@Param('id') id: number, @Body() Stock: StockDto, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.StockService.update(id, Stock);
+    
+      return this.stockService.update(id, Stock);
   }
 
   /*
@@ -42,31 +42,38 @@ export class StockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByClient')
   findAllByClient(@Request() req): Promise<Stock[]> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.StockService.findAllByClient(req.user.client_id);
+    
+      return this.stockService.findAllByClient(req.user.client_id);
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByIdAndClient')
   findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Stock[]> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.StockService.findAllByIdAndClient(id, req.user.client_id);
-    else if (req.user.permiss == 'user')
-      return this.StockService.findAllByIdAndClient(req.user.id, req.user.client_id);
+    
+      return this.stockService.findAllByIdAndClient(id, req.user.client_id);
+    
+      return this.stockService.findAllByIdAndClient(req.user.id, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByNameAndClient')
   findOneByNameAndClient(@Body() name: string, @Request() req): Promise<Stock> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.StockService.findOneByNameAndClient(name, req.user.client_id);
+    
+      return this.stockService.findOneByNameAndClient(name, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByRefAndClient')
-  findOneByRefAndClient(@Body() ref_code: string, @Request() req): Promise<Stock> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
-      return this.StockService.findOneByRefAndClient(ref_code, req.user.client_id);
+  findOneByRefAndClient(@Body('ref_code') ref_code: string, @Request() req): Promise<Stock> {
+    
+      return this.stockService.findOneByRefAndClient(ref_code, req.user.client_id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('findAllByRefAndClient')
+  findAllByRefAndClient(@Body('ref_code') ref_code: string, @Request() req): Promise<Stock[]> {
+    
+      return this.stockService.findAllByRefAndClient(ref_code, req.user.client_id);
   }
 
   /*
@@ -76,22 +83,22 @@ export class StockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
   findAll(@Request() req): Promise<Stock[]> {
-    if (req.user.permiss == 'admin')
-      return this.StockService.findAll();
+  
+      return this.stockService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllbyName')
   findAllbyType(@Body('name') name: string, @Request() req): Promise<Stock[]> {
-    if (req.user.permiss == 'admin')
-        return this.StockService.findAllByName(name);
+  
+        return this.stockService.findAllByName(name);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
   findbyId(@Body('id') id: number, @Request() req): Promise<Stock> {
-    if (req.user.permiss == 'admin')
-        return this.StockService.findById(id);
+  
+        return this.stockService.findById(id);
   }
 
 }

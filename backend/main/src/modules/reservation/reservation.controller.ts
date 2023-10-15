@@ -20,7 +20,7 @@ export class ReservationController {
   @Delete('remove')
   remove(@Body('id') id: number, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.ReservationService.delete(id);
   }
 
@@ -28,7 +28,7 @@ export class ReservationController {
   @Put('update')
   update(@Param('id') id: number, @Body() Reservation: ReservationDto, @Request() req)
   {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.ReservationService.update(id, Reservation);
   }
 
@@ -60,7 +60,7 @@ export class ReservationController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByDateAndClient')
   findAllByDateAndClient(@Body() date : Date, table_id : number , @Request() req): Promise<Reservation[]> {
-    if (['admin', 'owner', 'user_plus'].includes(req.user.permiss))
+    
       return this.ReservationService.findAllByDateAndClient(date, req.user.client_id);
   }
 
@@ -72,21 +72,21 @@ export class ReservationController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
   findAll(@Request() req): Promise<Reservation[]> {
-    if (req.user.permiss == 'admin')
+  
       return this.ReservationService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllbyName')
   findAllbyDate(@Body('date') date: Date, @Request() req): Promise<Reservation[]> {
-    if (req.user.permiss == 'admin')
+  
         return this.ReservationService.findAllByDate(date);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
   findAllbyId(@Body('id') id: number, @Request() req): Promise<Reservation> {
-    if (req.user.permiss == 'admin')
+  
         return this.ReservationService.findOneById(id);
   }
 
