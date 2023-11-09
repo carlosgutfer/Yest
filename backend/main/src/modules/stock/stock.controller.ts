@@ -11,27 +11,22 @@ export class StockController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('new')
-  create(@Body() StockDto: StockDto, @Request() req): Promise<Stock> 
+  create(@Body() StockDto: StockDto): Promise<Stock> 
   {
-    
-    {
       return this.stockService.create(StockDto);
-    }
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete('remove')
-  remove(@Body('id') id: number, @Request() req)
+  remove(@Param('id') id: number, @Request() req)
   {
-    
       return this.stockService.delete(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Put('update')
-  update(@Param('id') id: number, @Body() Stock: StockDto, @Request() req)
-  {
-    
+  update(@Param('id') id: number, @Body() Stock: StockDto)
+  { 
       return this.stockService.update(id, Stock);
   }
 
@@ -42,36 +37,32 @@ export class StockController {
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByClient')
   findAllByClient(@Request() req): Promise<Stock[]> {
-    
       return this.stockService.findAllByClient(req.user.client_id);
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByIdAndClient')
-  findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Stock[]> {
-    
-      return this.stockService.findAllByIdAndClient(id, req.user.client_id);
-    
-      return this.stockService.findAllByIdAndClient(req.user.id, req.user.client_id);
+  findAllByIdAndClient(@Param() id: number, @Request() req): Promise<Stock[]> {
+      return this.stockService.findAllByIdAndClient(id, req.user.client_id);    
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByNameAndClient')
-  findOneByNameAndClient(@Body() name: string, @Request() req): Promise<Stock> {
+  findOneByNameAndClient(@Param() name: string, @Request() req): Promise<Stock> {
     
       return this.stockService.findOneByNameAndClient(name, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findOneByRefAndClient')
-  findOneByRefAndClient(@Body('ref_code') ref_code: string, @Request() req): Promise<Stock> {
+  findOneByRefAndClient(@Param('ref_code') ref_code: string, @Request() req): Promise<Stock> {
     
       return this.stockService.findOneByRefAndClient(ref_code, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllByRefAndClient')
-  findAllByRefAndClient(@Body('ref_code') ref_code: string, @Request() req): Promise<Stock[]> {
+  findAllByRefAndClient(@Param('ref_code') ref_code: string, @Request() req): Promise<Stock[]> {
     
       return this.stockService.findAllByRefAndClient(ref_code, req.user.client_id);
   }
@@ -82,21 +73,21 @@ export class StockController {
   */
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
-  findAll(@Request() req): Promise<Stock[]> {
+  findAll(): Promise<Stock[]> {
   
       return this.stockService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
   @Get('findAllbyName')
-  findAllbyType(@Body('name') name: string, @Request() req): Promise<Stock[]> {
+  findAllbyName(@Param('name') name: string): Promise<Stock[]> {
   
         return this.stockService.findAllByName(name);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('findbyId')
-  findbyId(@Body('id') id: number, @Request() req): Promise<Stock> {
+  findbyId(@Param('id') id: number, @Request() req): Promise<Stock> {
   
         return this.stockService.findById(id);
   }
