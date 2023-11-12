@@ -11,14 +11,14 @@ export class OrderController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('new')
-  create(@Body() OrderDto: OrderDto, @Request() req): Promise<Order> 
+  create(@Body() OrderDto: OrderDto): Promise<Order> 
   {   
     return this.orderService.create(OrderDto); 
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete('remove')
-  remove(@Body('id') id: number, @Request() req)
+  remove(@Param('id') id: number, @Request() req)
   {
     
       return this.orderService.delete(id);
@@ -44,8 +44,8 @@ export class OrderController {
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findOneByTableAndClient')
-  findOneByIdClient(@Body() id: number, @Request() req): Promise<Order> {
+  @Get('findOneByTableAndClient/:id')
+  findOneByIdClient(@Param('id') id: number, @Request() req): Promise<Order> {
     if (['admin', 'owner', 'user_plus', 'user'].includes(req.user.permiss))
       return this.orderService.findOneByTableAndClient(id, req.user.client_id);
   }

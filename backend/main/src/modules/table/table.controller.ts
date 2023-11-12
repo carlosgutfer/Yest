@@ -17,15 +17,15 @@ export class Restaurant_TableController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete('remove')
-  remove(@Body('id') id: number, @Request() req)
+  @Delete('remove/:id')
+  remove(@Param('id') id: number, @Request() req)
   {
     
       return this.TableService.delete(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Put('update')
+  @Put('update/:id')
   update(@Param('id') id: number, @Body() Restaurant_Table: Restaurant_TableDto, @Request() req)
   {
     
@@ -44,15 +44,15 @@ export class Restaurant_TableController {
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByTableAndClient')
-  findAllByUserAndClient(@Body() restaurant_id: number, @Request() req): Promise<Restaurant_Table[]> {
+  @Get('findAllByTableAndClient/:restaurant_id')
+  findAllByUserAndClient(@Param('restaurant_id') restaurant_id: number, @Request() req): Promise<Restaurant_Table[]> {
     if (['admin', 'owner', 'user_plus', 'user'].includes(req.user.permiss))
       return this.TableService.findAllByRestaurantAndClient(restaurant_id, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findOneByRestaurantAndClient')
-  findOneByRestaurantAndClient(@Body() number_table : number, restaurant_id : number , @Request() req): Promise<Restaurant_Table> {
+  @Get('findOneByRestaurantAndClient/:number_table')
+  findOneByRestaurantAndClient(@Param('number_table') number_table : number, restaurant_id : number , @Request() req): Promise<Restaurant_Table> {
     
       return this.TableService.findOneByRestaurantAndClient(number_table, restaurant_id , req.user.client_id);
   }
@@ -64,14 +64,14 @@ export class Restaurant_TableController {
   */
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
-  findAll(@Request() req): Promise<Restaurant_Table[]> {
+  findAll(): Promise<Restaurant_Table[]> {
   
       return this.TableService.findAll();
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findbyId')
-  findAllbyId(@Body('id') id: number, @Request() req): Promise<Restaurant_Table> {
+  @Get('findbyId/:id')
+  findAllbyId(@Param('id') id: number): Promise<Restaurant_Table> {
   
         return this.TableService.findOneById(id);
   }

@@ -11,7 +11,7 @@ export class ClientController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('new_client')
-  create(@Body() createUserDto: ClientDto, @Request() req): Promise<Client> 
+  create(@Body() createUserDto: ClientDto): Promise<Client> 
   {
   
       return this.clientService.create(createUserDto);
@@ -19,19 +19,19 @@ export class ClientController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('all_clients')
-  findAll(@Request() req): Promise<Client[]> {
+  findAll(): Promise<Client[]> {
       return this.clientService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findbyCIF')
-  findOne(@Body('CIF') CIF: string): Promise<Client> {
+  @Get('findbyCIF/:CIF')
+  findbyCIF(@Param('CIF') CIF: string): Promise<Client> {
     return this.clientService.findOneByCIF(CIF);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete('remove_client')
-  remove(@Body('id') id: number, @Request() req)
+  @Delete('remove_client/:id')
+  remove_client(@Param('id') id: number, @Request() req)
   {
   
       return this.clientService.delete(id);

@@ -20,15 +20,15 @@ export class RestaurantController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete('remove')
-  remove(@Body('id') id: number, @Request() req)
+  @Delete('remove/:id')
+  remove(@Param('id') id: number, @Request() req)
   {
     if (['admin'].includes(req.user.permiss))
       return this.Restaurantervice.delete(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Put('update')
+  @Put('update/:id')
   update(@Param('id') id: number, @Body() Restaurant: RestaurantDto, @Request() req)
   {
     
@@ -47,15 +47,15 @@ export class RestaurantController {
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findOneByNameAndClient')
-  findOneByNameAndClient(@Body() name: string, @Request() req): Promise<Restaurant> {
+  @Get('findOneByNameAndClient/:name')
+  findOneByNameAndClient(@Param('name') name: string, @Request() req): Promise<Restaurant> {
     
       return this.Restaurantervice.findOneByNameAndClient(name, req.user.client_id);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByIdandClient')
-  findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Restaurant[]> {
+  @Get('findAllByIdandClient/:id')
+  findAllByIdAndClient(@Param('id') id: number, @Request() req): Promise<Restaurant[]> {
     
       return this.Restaurantervice.findAllByIdAndClient(id, req.user.client_id);
   }
@@ -67,22 +67,19 @@ export class RestaurantController {
   */
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
-  findAll(@Request() req): Promise<Restaurant[]> {
-  
+  findAll(): Promise<Restaurant[]> {
       return this.Restaurantervice.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllbyName')
-  findAllbyType(@Body('name') name: string, @Request() req): Promise<Restaurant[]> {
-  
+  @Get('findAllbyName/:name')
+  findAllbyType(@Param('name') name: string): Promise<Restaurant[]> {
         return this.Restaurantervice.findAllByName(name);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findbyId')
-  findbyId(@Body('id') id: number, @Request() req): Promise<Restaurant> {
-  
+  @Get('findbyId/:id')
+  findbyId(@Param('id') id: number): Promise<Restaurant> {
         return this.Restaurantervice.findById(id);
   }
 

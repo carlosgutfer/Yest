@@ -34,6 +34,10 @@ export class UsersService {
         return await this.userRepository.destroy({ where: { id }});
     }
 
+    async findAll(): Promise<User[]> {
+        return await this.userRepository.findAll<User>();
+    }
+
     async findAllPermissionsOfUser(id: number): Promise<Permissions[]> {
         // Utiliza la relación "permissions" en el modelo User para obtener los permisos del usuario
         const userWithPermissions = await this.userRepository.findOne({

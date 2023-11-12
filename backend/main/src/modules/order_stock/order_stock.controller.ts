@@ -17,16 +17,16 @@ export class Order_stockController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete('remove')
-  remove(@Body('id') id: number, @Request() req)
+  @Delete('remove/:id')
+  remove(@Param('id') id: number)
   {
     
       return this.OrderStockService.delete(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Put('update')
-  update(@Param('id') id: number, @Body() Order: Order_stockDto, @Request() req)
+  @Put('update/:id')
+  update(@Param('id') id: number, @Body() Order: Order_stockDto)
   {
     
       return this.OrderStockService.update(id, Order);
@@ -45,8 +45,8 @@ export class Order_stockController {
 
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllbyOrderAndClient')
-  findAllByOrderAndClient(@Body() order_id: number, @Request() req): Promise<Order_stock[]> {
+  @Get('findAllbyOrderAndClient/:order_id')
+  findAllByOrderAndClient(@Param('order_id') order_id: number, @Request() req): Promise<Order_stock[]> {
   
         return this.OrderStockService.findAllByOrderAndClient(order_id, req.user.client_id);
   }
@@ -58,24 +58,22 @@ export class Order_stockController {
   */
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
-  findAll(@Request() req): Promise<Order_stock[]> {
-  
+  findAll(): Promise<Order_stock[]> {
       return this.OrderStockService.findAll();
   }
   
 
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findbyId')
-  findAllbyId(@Body('id') id: number, @Request() req): Promise<Order_stock> {
-  
+  @Get('findbyId/:id')
+  findAllbyId(@Param('id') id: number): Promise<Order_stock> {
         return this.OrderStockService.findOneById(id);
   }
 
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByOrder')
-  findAllByOrder(@Body() order_id: number, @Request() req): Promise<Order_stock[]> {
+  @Get('findAllByOrder/:order_id')
+  findAllByOrder(@Param() order_id: number): Promise<Order_stock[]> {
   
         return this.OrderStockService.findAllByOrder(order_id);
   }

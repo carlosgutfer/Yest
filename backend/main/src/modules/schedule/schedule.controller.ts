@@ -56,12 +56,9 @@ export class ScheduleController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllByIdAndClient')
-  findAllByIdAndClient(@Body() id: number, @Request() req): Promise<Schedule[]> {
-    
+  @Get('findAllByIdAndClient/:id')
+  findAllByIdAndClient(@Param('id') id: number, @Request() req): Promise<Schedule[]> {
       return this.ScheduleService.findAllByIdAndClient(id, req.user.client_id);
-    
-      return this.ScheduleService.findAllByIdAndClient(req.user.id, req.user.client_id);
   }
 
 
@@ -71,22 +68,20 @@ export class ScheduleController {
   */
   @UseGuards(AuthGuard('jwt'))
   @Get('findAll')
-  findAll(@Request() req): Promise<Schedule[]> {
+  findAll(): Promise<Schedule[]> {
   
       return this.ScheduleService.findAll();
   }
   
   @UseGuards(AuthGuard('jwt'))
-  @Get('findAllbyType')
-  findAllbyType(@Body('TYPE') type: string, @Request() req): Promise<Schedule[]> {
-  
+  @Get('findAllbyType/:type')
+  findAllbyType(@Param('type') type: string): Promise<Schedule[]> {
         return this.ScheduleService.findAllByType(type);
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('findbyId')
-  findAllbyId(@Body('id') id: number, @Request() req): Promise<Schedule> {
-  
+  @Get('findbyId/:id')
+  findAllbyId(@Param('id') id: number): Promise<Schedule> {
         return this.ScheduleService.findById(id);
   }
 

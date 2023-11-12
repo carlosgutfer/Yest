@@ -10,19 +10,19 @@ import { PermissionAction } from '../auth/casl-ability.factory';
 export class UsersController {
   
   constructor(private readonly usersService: UsersService) {}
-
-  /*@Post()
+/*
+  @Post()
   create(@Body() createUserDto: UserDto): Promise<User> {
     return this.usersService.create(createUserDto);
   }*/
 
-  /*
+  
   @UseGuards(AuthGuard('jwt'))
-  @Get()
+  @Get('all_user')
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
-  */
+  
 
   @UseGuards(AuthGuard('jwt'))
   @Get('new')
@@ -32,8 +32,8 @@ export class UsersController {
 
   @UseGuards(AuthGuard('jwt'), PermissionsGuard)
   @CheckPermissions([PermissionAction.DELETE, "users"])
-  @Delete('delete')
-  remove(@Body('id') id: number){
+  @Delete('delete/:id')
+  remove(@Param('id') id: number){
     return this.usersService.delete(id);
   }
 

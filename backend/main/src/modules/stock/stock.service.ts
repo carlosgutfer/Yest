@@ -50,7 +50,8 @@ export class StockService {
     }
 
     async findById(id: number): Promise<Stock> {
-        return await this.stockRepository.findByPk<Stock>(id);
+       const result =  await this.stockRepository.findByPk<Stock>(id);
+       return result;
     }
 
     async findAll(): Promise<Stock[]> {
